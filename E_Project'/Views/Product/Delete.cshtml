@@ -1,0 +1,172 @@
+﻿
+
+@model E_Project_.Models.ViewModels.ProductVM
+
+
+
+@{
+   
+    var title = " Delete Product ";
+
+}
+
+
+
+<form asp-action="Delete" method="post" enctype="multipart/form-data">
+    @*id as hidden input parameter *@
+        <input asp-for="Product.Id" hidden />
+    
+
+
+  @*  <div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+    <div class="form-group row">
+        <h2 class="text-info pl-3"> @title </h2>
+
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.Name" ></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Product.Name" class="form-control" disabled />
+                    @*<span asp-validation-for="Product.Name" class="text-danger"></span>*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Product.Price" class="form-control" disabled />
+                    @*<span asp-validation-for="Product.Price" class="text-danger"></span>*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.ShortDescription"></label>
+                </div>
+                <div class="col-8">
+                    @*//using summernote*@
+                    <input asp-for="Product.ShortDescription" class="form-control" disabled />
+                    <span asp-validation-for="Product.ShortDescription" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.Description"></label>
+                </div>
+                <div class="col-8">
+                    @*//using summernote*@
+                    <textarea asp-for="Product.Description" class="form-control" id="summernote" disabled></textarea>
+                    @*<span asp-validation-for="Product.Description" class="text-danger"></span>*@
+                </div>
+            </div>
+          
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.Image"></label>
+                </div>
+                <div class="col-8">
+                    <input type="file" name="files" id="uploadBox" multiple class="form-control" disabled/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.CategoryId"></label>
+                </div>
+                <div class="col-8">
+
+
+                    @*//1 viewBag in header   @*<select asp-for="CategoryId" asp-items="selectListItems" class="form-control" >*@
+                    @*@*//2 viewbag*@ @*<select asp-for="CategoryId" asp-items="@ViewBag.CategoryDropDownList" class="form-control" >*@
+                    <select asp-for="Product.CategoryId" asp-items="Model.CategorySelectListItems" class="form-control" disabled>
+                        <option disabled selected> ---Select Category---</option>
+                    </select>
+                    @*<span asp-validation-for="Product.CategoryId" class="text-danger"></span>*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.ApplicationTypeId"></label>
+                </div>
+                <div class="col-8">
+
+
+                    @*//1 viewBag in header   @*<select asp-for="CategoryId" asp-items="selectListItems" class="form-control" >*@
+                    @*@*//2 viewbag*@ @*<select asp-for="CategoryId" asp-items="@ViewBag.CategoryDropDownList" class="form-control" >*@
+                    <select asp-for="Product.ApplicationTypeId" asp-items="Model.ApplicationSelectListItems" class="form-control" disabled>
+                        <option disabled selected> --- Select Application Type---</option>
+                    </select>
+                    @*<span asp-validation-for="Product.CategoryId" class="text-danger"></span>*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-8 offset-4 row">
+
+                    <div class="col">
+                  
+                            <input type="submit" value="Delete" class="btn btn-info w-100" />
+
+
+                   
+
+
+                    </div>
+                    <div class="col">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-success"> Back To List </a>
+                    </div>
+                    <div class="col">
+                        <a asp-controller="Product" asp-action="UpSert" asp-route-Id="@Model.Product.Id" class="btn btn-success"> Update </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            @*//src full path for image stored in db just Guid and extension *@
+            @if (Model.Product.Id != 0)
+            {
+                <img src="@WC.ImagePath@Model.Product.Image" width="100%" style="border-radius:5px; border:1px solid #bbb" />
+            }
+
+        </div>
+
+    </div>
+</form>
+
+
+
+
+
+
+
+
+@*
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }*@
+@*
+    <script>
+        // validation on image
+
+        function ValidateInput() {
+            if (document.getElementById("uploadBox").value == "") {
+                Swal.fire(
+                    'Error!',
+                    'Please Upload an Image !',
+                    'Error'
+                )
+                return false;
+            }
+            return true;
+        }
+        //Run SummerNote For TextArea
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 200
+            });
+        });
+
+    </script>*@
+

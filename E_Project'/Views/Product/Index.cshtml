@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Product>
+
+@{
+
+
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container p-3  ">
+
+    <div class="row pt-3">
+
+        <div class="col-6">
+            <h1 class="text-primary">Product List</h>
+        </div>
+
+        <div class="col-6 text-right">
+            <a asp-controller="Product" asp-action="UpSert" class="btn btn-primary"><i class="fa fa-solid fa-plus"></i> &nbsp; Create New Product </a>
+        </div>
+
+    </div>
+    <br /> <br />
+    @{
+        if (Model.Any() == true)
+        {
+
+            <table class="table table-bordered  table-striped table-hover" style="width:100%">
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                      
+                        <th>price </th>
+                        <th> Categoty </th>
+                        <th> Application Type </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td width="30%">@obj.Name</td>
+                            <td width="10%">@obj.Price</td>
+                            <td width="20%">@obj.Category.Name</td>
+                            <td width="20%">@obj.ApplicationType.Name</td>
+                            <td class="text-center">
+                                <div class="w-75 btn-group" role="group">
+
+
+                                    <a asp-controller="Product" asp-action="UpSert" class="btn btn-primary mx-2" asp-route-Id="@obj.Id"> <i class="fa fa-pen-fancy"></i>  </a>
+
+
+
+                                    <a asp-controller="Product" asp-action="Delete" class="btn btn-danger mx-2" asp-route-Id="@obj.Id"> <i class="fa fa-trash"></i>  </a>
+
+
+                                </div>
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        }
+        else
+        {
+
+
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Well done!</h4>
+                <p>Aww yeah, you successfully read this important alert message. No Product Found Yet!!</p>
+                <hr>
+                <p class="mb-0">You Can Go <a asp-controller="Product" asp-action="Index">find Product from here</a> </p>
+            </div>
+        }
+
+
+    }
+
+
+
+</div>
+
+
+

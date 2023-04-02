@@ -1,0 +1,148 @@
+﻿@model E_Project_.Models.ViewModels.ProductUserVM
+
+@{
+    double total = 0;
+}
+
+<form method="post"  asp-action="Summary">
+    <br />
+    <div class="backgroundWhiteBorder">
+        <div class="container">
+            <div class="card">
+                <div class="card-header bg-dark text-light ml-0 row container">
+                    <div class="col-6">
+                        <i class="fa fa-shopping-cart"></i> &nbsp;
+                        Order Summary
+                    </div>
+                    <div class="col-6 text-right">
+                        <a asp-controller="Cart" asp-action="Index" class="btn btn-outline-info btn-sm">Back to Cart</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container rounded p-2">
+                        <div class="row">
+                            <div class="col-12 col-lg-7 pb-4">
+                                <div class="row">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-info"> User Details:</span>
+                                    </h4>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label asp-for="applicationUser.FullName"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input asp-for="applicationUser.FullName" class="form-control" />
+                                        <span asp-validation-for="applicationUser.FullName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label asp-for="applicationUser.PhoneNumber"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input asp-for="applicationUser.PhoneNumber" class="form-control" />
+                                        <span asp-validation-for="applicationUser.PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label asp-for="applicationUser.Email"></label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input asp-for="applicationUser.Email" type="text" class="form-control" />
+                                        <span asp-validation-for="applicationUser.Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-5 row">
+                                <div class="col-12">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-info">Order Summary:</span>
+                                    </h4>
+                                    <ul class="list-group mb-3">
+                                    @*    @foreach (var product in Model.ProductLst)
+                                        {
+
+                                        // Beacuse foreach send null object because not efficient with hidden input 
+                                            <input asp-for="@product.Id" hidden />
+                                            <input asp-for="@product.Name" hidden />
+
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <div>
+                                                    <h6 class="my-0">@product.Name</h6>
+                                                    <small class="text-muted">Price per Egp: @product.Price LE</small>
+                                                </div>
+                                            </li>
+                                         
+                                                 total+= product.Price;
+                                            
+                                        }*@
+@*
+                                        @for (int i=0;i< Model.ProductLst.Count;i++)
+                                        {
+                                            <input asp-for="@Model.ProductLst[i].Id" type="hidden" />
+                                            <input asp-for="@Model.ProductLst[i].Name" type="hidden" />
+
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <div>
+                                                    <h6 class="my-0">@Model.ProductLst[i].Name</h6>
+                                                    <small class="text-muted">Price per Egp: @Model.ProductLst[i].Price</small>
+                                                </div>
+                                            </li>
+
+                                            total += @Model.ProductLst[i].Price;
+
+                                        }
+                                        *@
+
+                                        @for (int i = 0; i < Model.ProductLst.Count; i++)
+                                        {
+                                            <input asp-for="@Model.ProductLst[i].Id" type="hidden" />
+                                            <input asp-for="@Model.ProductLst[i].Name" type="hidden" />
+
+                                            <li class="list-group-item d-flex justify-content-between">
+                                                <div>
+                                                    <h6 class="my-0">@Model.ProductLst[i].Name</h6>
+                                                    <small class="text-muted">Price per Egp: @Model.ProductLst[i].Price</small>
+                                                </div>
+                                            </li>
+                                        }
+                                        <div class="total-price">
+                                            <h4 class="my-0">Total:</h4>
+                                            <span class="text-muted">EGP @Model.ProductLst.Sum(p => p.Price)</span>
+                                        </div>
+
+
+
+                                    </ul>
+@*
+                                    <ul class ="list-group mb-3">
+                                        Total Price per Egp:   @total LE
+                                    </ul>*@
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-12 col-md-5 offset-md-7">
+                            <button type="submit" class="btn btn-primary form-control">Submit Inquiry</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,57 @@
+﻿@model Category
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+
+<form asp-action="DeletePost" method="post"> 
+    @*id as hidden input parameter *@
+    <input asp-for="Id"  hidden/> 
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="form-group row">
+    <h2 class="text-info pl-3"> Delete Category </h2>
+
+</div>
+<div class="row">
+        <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                       <label asp-for="Name"></label>
+                    </div>
+                    <div class="col-8">
+                       <input asp-for="Name" class="form-control" disabled />
+@*                       <span asp-validation-for="Name" class="text-danger"></span>
+*@                    </div>
+                 </div>
+             <div class="form-group row">
+                <div class="col-4">
+                   <label asp-for="DisplayOrder"></label>
+                    </div>
+                    <div class="col-8">
+                <input asp-for="DisplayOrder" class="form-control"  disabled/>
+                @*<span asp-validation-for="DisplayOrder"  class="text-danger"></span>*@
+                    </div>
+                 </div>
+            <div class="form-group row">
+                <div class="col-8 offset-4 row">
+
+                    <div class="col">
+                        <input type="submit" value="Delete" class="btn btn-danger w-100" />
+                    </div>
+                    <div class="col">
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-success"><i class="fa-solid fa-right-from-bracket"></i> Back To List </a>
+                    </div>
+                    <div class="col">
+                        <a asp-controller="Category" asp-action="Edit" asp-route-Id="@Model.Id" class="btn btn-success">Edit </a>
+                    </div>
+                </div>
+            </div>
+         </div>
+        <div class="col-4">
+        </div>
+</div>
+</form>
