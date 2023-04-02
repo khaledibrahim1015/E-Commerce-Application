@@ -65,7 +65,7 @@ namespace E_Project_.Utility
         //}
 
 
-        ///  Here We Can Impelement send Email (Watch) DevCreed
+        ///  Here We Can Impelement send Email 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
             string FromEmail = "khaledibrahimahmedali@outlook.com";
